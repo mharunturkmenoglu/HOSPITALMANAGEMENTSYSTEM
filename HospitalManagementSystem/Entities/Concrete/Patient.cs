@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagementSystem.Entities.Concrete
 {
-    public class Patient
+    public class Patient : EntityBase
     {
         public int InsuranceNo { get; set; }
     }
