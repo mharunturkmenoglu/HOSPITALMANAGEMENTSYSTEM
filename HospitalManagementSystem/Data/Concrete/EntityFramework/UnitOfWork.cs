@@ -22,14 +22,14 @@ namespace HospitalManagementSystem.Data.Concrete.EntityFramework
 
         public IPatientRepository Patients => _patientRepository ?? new EfPatientRepository(_context);
 
-        public void Dispose()
+        public async ValueTask DisposeAsync()
         {
-            _context.Dispose();
+            await _context.DisposeAsync();
         }
 
-        public int Save()
+        public async Task<int> SaveAsync()
         {
-            return _context.SaveChanges();
+            return await _context.SaveChangesAsync();
         }
     }
 }

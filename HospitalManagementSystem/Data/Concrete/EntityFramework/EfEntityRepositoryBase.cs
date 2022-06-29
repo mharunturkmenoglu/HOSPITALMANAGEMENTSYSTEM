@@ -13,28 +13,28 @@ namespace HospitalManagementSystem.Data.Concrete.EntityFramework
             _context = context;
         }
 
-        public TEntity Add(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
-            _context.Set<TEntity>().AddAsync(entity);
+            await _context.Set<TEntity>().AddAsync(entity);
             return entity;
         }
 
-        public bool Any(Expression<Func<TEntity, bool>> predicate)
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return _context.Set<TEntity>().Any(predicate);
+            return await _context.Set<TEntity>().AnyAsync(predicate);
         }
 
-        public int Count(Expression<Func<TEntity, bool>> predicate = null)
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null)
         {
-            return (predicate == null ? _context.Set<TEntity>().Count() : _context.Set<TEntity>().Count(predicate));
+            return await (predicate == null ? _context.Set<TEntity>().CountAsync() : _context.Set<TEntity>().CountAsync(predicate));
         }
 
-        public void Delete(TEntity entity)
+        public async Task DeleteAsync(TEntity entity)
         {
-            _context.Set<TEntity>().Remove(entity);
+            await Task.Run(() => { _context.Set<TEntity>().Remove(entity); });
         }
 
-        public IList<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate = null, params Expression<Func<TEntity, object>>[] includeProperties)
+        public async Task<IList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate = null, params Expression<Func<TEntity, object>>[] includeProperties)
         {
             IQueryable<TEntity> query = _context.Set<TEntity>();
             if (predicate != null)
@@ -49,10 +49,10 @@ namespace HospitalManagementSystem.Data.Concrete.EntityFramework
                     query = query.Include(includeProperty);
                 }
             }
-            return query.ToList();
+            return await query.ToListAsync();
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
         {
             IQueryable<TEntity> query = _context.Set<TEntity>();
             query = query.Where(predicate);
@@ -64,12 +64,12 @@ namespace HospitalManagementSystem.Data.Concrete.EntityFramework
                     query = query.Include(includeProperty);
                 }
             }
-            return query.SingleOrDefault();
+            return await query.SingleOrDefaultAsync();
         }
 
-        public TEntity Update(TEntity entity)
+        public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            _context.Set<TEntity>().Update(entity);
+            await Task.Run(() => _context.Set<TEntity>().Update(entity));
             return entity;
         }
     }
