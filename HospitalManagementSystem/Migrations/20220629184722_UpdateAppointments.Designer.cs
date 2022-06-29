@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalManagementSystem.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220628143433_InitialSeed")]
-    partial class InitialSeed
+    [Migration("20220629184722_UpdateAppointments")]
+    partial class UpdateAppointments
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,6 +68,9 @@ namespace HospitalManagementSystem.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("No")
+                        .IsUnique();
+
                     b.ToTable("Doctors");
                 });
 
@@ -95,6 +98,12 @@ namespace HospitalManagementSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InsuranceNo")
+                        .IsUnique();
+
+                    b.HasIndex("No")
+                        .IsUnique();
 
                     b.ToTable("Patients");
                 });

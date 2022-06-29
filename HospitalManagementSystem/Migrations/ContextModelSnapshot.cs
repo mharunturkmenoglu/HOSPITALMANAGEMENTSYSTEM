@@ -66,6 +66,9 @@ namespace HospitalManagementSystem.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("No")
+                        .IsUnique();
+
                     b.ToTable("Doctors");
                 });
 
@@ -93,6 +96,12 @@ namespace HospitalManagementSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InsuranceNo")
+                        .IsUnique();
+
+                    b.HasIndex("No")
+                        .IsUnique();
 
                     b.ToTable("Patients");
                 });

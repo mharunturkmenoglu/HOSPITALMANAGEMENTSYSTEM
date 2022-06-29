@@ -4,7 +4,7 @@
 
 namespace HospitalManagementSystem.Migrations
 {
-    public partial class InitialSeed : Migration
+    public partial class UpdateAppointments : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -76,6 +76,24 @@ namespace HospitalManagementSystem.Migrations
                 name: "IX_Appointments_PatientId",
                 table: "Appointments",
                 column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Doctors_No",
+                table: "Doctors",
+                column: "No",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patients_InsuranceNo",
+                table: "Patients",
+                column: "InsuranceNo",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patients_No",
+                table: "Patients",
+                column: "No",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
