@@ -1,4 +1,8 @@
+using HospitalManagementSystem.Data.Abstract;
+using HospitalManagementSystem.Data.Concrete.EntityFramework;
 using HospitalManagementSystem.Data.Concrete.EntityFramework.Contexts;
+using HospitalManagementSystem.Services.Abstract;
+using HospitalManagementSystem.Services.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +16,8 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("LocalDB");
 builder.Services.AddDbContext<Context>(options => options.UseSqlServer(connectionString));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IDoctorService, DoctorManager > ();
 
 var app = builder.Build();
 
