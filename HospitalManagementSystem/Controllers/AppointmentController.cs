@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace HospitalManagementSystem.Controllers
 {
     [ApiController]
-    public class AppontmentController : ControllerBase
+    public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentService _appointmentService;
 
-        public AppontmentController(IAppointmentService appointmentService)
+        public AppointmentController(IAppointmentService appointmentService)
         {
             _appointmentService = appointmentService;
         }
