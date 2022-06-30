@@ -18,6 +18,9 @@ var connectionString = builder.Configuration.GetConnectionString("LocalDB");
 builder.Services.AddDbContext<Context>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IDoctorService, DoctorManager > ();
+builder.Services.AddScoped<IPatientService, PatientManager>();
+builder.Services.AddScoped<IAppointmentService, AppointmentManager>();
+
 
 var app = builder.Build();
 
