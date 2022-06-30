@@ -38,3 +38,4 @@ msbuild.wrn
 HospitalManagementSystem/appsettings.Development.json
 HospitalManagementSystem/Controllers/WeatherForecastController.cs
 HospitalManagementSystem/WeatherForecast.cs
+HospitalManagementSystem/appsettings.Development.json
