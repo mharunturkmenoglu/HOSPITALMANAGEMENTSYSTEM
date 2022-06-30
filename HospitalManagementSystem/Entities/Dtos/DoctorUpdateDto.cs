@@ -19,7 +19,7 @@ namespace HospitalManagementSystem.Entities.Dtos
         [MaxLength(50, ErrorMessage = "{0} field must be at least {1} characters")]
         [MinLength(2, ErrorMessage = "{0} field must be maximum {1} characters")]
         public string? Surname { get; set; }
-        [DisplayName("Doctor Surname")]
+        [DisplayName("Doctor Address")]
         [Required(ErrorMessage = "{0} is required.")]
         [MaxLength(50, ErrorMessage = "{0} field must be at least {1} characters")]
         [MinLength(2, ErrorMessage = "{0} field must be maximum {1} characters")]
