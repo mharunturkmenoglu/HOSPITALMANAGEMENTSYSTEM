@@ -7,40 +7,46 @@ namespace HospitalManagementSystem.Services.Concrete
 {
     public class DoctorManager : IDoctorService
     {
-        private readonly IUnitOfWork _unitofWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public DoctorManager(IUnitOfWork unitofWork)
         {
-            _unitofWork = unitofWork;
+            _unitOfWork = unitofWork;
         }
 
         public async Task AddDoctor(DoctorAddDto doctorAddDto)
         {
-            await _unitofWork.Doctors.AddAsync(new Doctor 
+            await _unitOfWork.Doctors.AddAsync(new Doctor
             {
                 Address = doctorAddDto.Address,
                 Name = doctorAddDto.Name,
                 No = doctorAddDto.No,
-                Surname=doctorAddDto.Surname}
-            );
-            await _unitofWork.SaveAsync();
+                Surname = doctorAddDto.Surname
+            });
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task<Doctor> GetDoctor(int id)
         {
-            var doctor = await _unitofWork.Doctors.GetAsync(x => x.Id == id);
+            var doctor = await _unitOfWork.Doctors.GetAsync(x => x.Id == id);
             return doctor;
         }
 
-        public async Task RemoveDoctor(Doctor doctor)
+        public async Task<ICollection<Doctor>> GetAllDoctors()
         {
-            await _unitofWork.Doctors.DeleteAsync(doctor);
-            await _unitofWork.SaveAsync();
+            var doctor = await _unitOfWork.Doctors.GetAllAsync();
+            return doctor;
+        }
+
+        public async Task RemoveDoctor(int id)
+        {
+            var doctor = await _unitOfWork.Doctors.GetAsync(x => x.Id == id);
+            await _unitOfWork.Doctors.DeleteAsync(doctor);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task UpdateDoctor(DoctorUpdateDto doctorUpdateDto, int id)
         {
-            id = 6;
             var doctor = new Doctor
             {
                 Id = id,
@@ -49,8 +55,8 @@ namespace HospitalManagementSystem.Services.Concrete
                 No = doctorUpdateDto.No,
                 Surname = doctorUpdateDto.Surname
             };
-            await _unitofWork.Doctors.UpdateAsync(doctor);
-            await _unitofWork.SaveAsync();
+            await _unitOfWork.Doctors.UpdateAsync(doctor);
+            await _unitOfWork.SaveAsync();
         }
     }
 }

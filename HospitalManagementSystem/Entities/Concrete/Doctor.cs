@@ -9,5 +9,6 @@ namespace HospitalManagementSystem.Entities.Concrete
 {
     public class Doctor : EntityBase, IEntity
     {
+        public List<Appointment> Appointments { get; set; }
     }
 }
