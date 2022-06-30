@@ -17,6 +17,14 @@ namespace HospitalManagementSystem.Data.Concrete.EntityFramework.Contexts
             builder.Entity<Patient>().HasIndex(x => x.InsuranceNo).IsUnique(true);
             builder.Entity<Patient>().HasIndex(x => x.No).IsUnique(true);
             builder.Entity<Doctor>().HasIndex(x => x.No).IsUnique(true);
+            builder.Entity<Appointment>()
+                .HasOne(x => x.Doctor)
+                .WithMany(x => x.Appointments)
+                .HasForeignKey(x => x.DoctorId)
+                .HasPrincipalKey(x => x.Id);
+
+            builder.Entity<Appointment>()
+                .HasOne(x => x.Patient).WithMany(x => x.Appointments).HasForeignKey(x => x.PatientId).HasPrincipalKey(x => x.Id);
         }
     }
 }
